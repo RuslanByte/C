@@ -32,15 +32,18 @@ void enque(int x)
     {
         head = (struct node *)malloc(sizeof(struct node));
         head->data = x;
-        head->pre = NULL;
+        head->next = NULL;
         tail = head;
     }
     else
     {
         tmp = (struct node *)malloc(sizeof(struct node));
         tmp->data = x;
-        tmp->next = tail;
-        tail = tmp;
+        tmp->next = NULL;
+        while(tail-> != NULL){
+            tail = tail->next;
+        }
+        tail->next = tmp;
     }
 }
 
@@ -58,11 +61,9 @@ int deque()
     else
     {
         returnData = head->data;
-        if (head->pre == NULL)
-            head = NULL;
-        else
-            head = head->pre;
-        head->next = NULL;
+        struct node* p = head;
+        head = head->next;
+        free(p);
     }
     return returnData;
 }
