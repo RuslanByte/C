@@ -43,7 +43,7 @@ void newNode(node **root, int data)
  * @param data value to store int he new node
  * @returns pointer to parent node
  */
-void insert(node *root, int data)
+void insert(node **root, int data)
 {
     // If the root of the subtree is null, insert key here
     if ((*root) == NULL)
@@ -266,7 +266,7 @@ int main()
         case 1:
             printf("Enter the new node's value:\n");
             scanf("%d", &data);
-            root = insert(root, data);
+            insert(&root, data);
             break;
 
         case 2:
