@@ -48,7 +48,7 @@ void insert(node **root, int data)
     // If the root of the subtree is null, insert key here
     if ((*root) == NULL)
     {
-        newNode(data);
+        newNode(root, data);
     }
     else if (data > (*root)->data)
     {
