@@ -25,7 +25,7 @@ typedef struct node
  * @note the node must be deleted before program terminates to avoid memory
  * leaks
  */
-node *newNode(int data)
+void newNode(node **root, int data)
 {
     // creates a slug
     node *tmp = (node *)malloc(sizeof(node));
@@ -34,8 +34,8 @@ node *newNode(int data)
     tmp->data = data;
     tmp->left = NULL;
     tmp->right = NULL;
+    root[0] = tmp;
 
-    return tmp;
 }
 
 /** Insertion procedure, which inserts the input key in a new node in the tree
@@ -43,26 +43,24 @@ node *newNode(int data)
  * @param data value to store int he new node
  * @returns pointer to parent node
  */
-node *insert(node *root, int data)
+void insert(node *root, int data)
 {
     // If the root of the subtree is null, insert key here
-    if (root == NULL)
+    if ((*root) == NULL)
     {
-        root = newNode(data);
+        newNode(data);
     }
-    else if (data > root->data)
+    else if (data > (*root)->data)
     {
         // If it isn't null and the input key is greater than the root key,
         // insert in the right leaf
-        root->right = insert(root->right, data);
+        insert((&(*root)->right), data);
     }
-    else if (data < root->data)
+    else if (data < (*root)->data)
     {  // If it isn't null and the input key is lower than the root key, insert
        // in the left leaf
-        root->left = insert(root->left, data);
+        insert((&(*root)->left), data);
     }
-    // Returns the modified tree
-    return root;
 }
 
 /** Utilitary procedure to find the greatest key in the left subtree
